@@ -1,11 +1,145 @@
 <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Mensaje para mi bebé</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            text-align: center;
+        }
+        header {
+            background: url('https://source.unsplash.com/1600x900/?wedding') center/cover no-repeat;
+            color: white;
+            padding: 80px 20px;
+        }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+        }
+        #countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        section {
+            padding: 50px 20px;
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .gallery img {
+            width: 300px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .evento {
+            background-color: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .detalle {
+            display: none;
+            margin-top: 10px;
+        }
+        form input, form button {
+            display: block;
+            margin: 10px auto;
+            padding: 15px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #405d27;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 20px;
+            background: #405d27;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hola bebé,</h1>
-    <p>Esto no son las entradas de verdad porque aún no nos las han entregado, pero el 8 de Junio del año que viene nos vamos al Bernabéu a ver al Duko.</p>
-    <p>Eres el amor de mi vida, espero que te guste &lt;3</p>
+    <header>
+        <h1>¡Nos Casamos!</h1>
+        <p>Cuenta regresiva para el gran día:</p>
+        <div id="countdown"></div>
+    </header>
+    
+    <section id="fotos">
+        <h2>Nuestras Fotos</h2>
+        <div class="gallery">
+            <img src="img1.jpg" alt="Foto 1">
+            <img src="img2.jpg" alt="Foto 2">
+        </div>
+    </section>
+    
+    <section id="itinerario">
+        <h2>Itinerario</h2>
+        <div class="evento" onclick="toggleEvento(this)">
+            <h3>Ceremonia</h3>
+            <p class="detalle">La ceremonia tendrá lugar en...</p>
+        </div>
+        <div class="evento" onclick="toggleEvento(this)">
+            <h3>Banquete</h3>
+            <p class="detalle">El banquete será en...</p>
+        </div>
+    </section>
+    
+    <section id="confirmacion">
+        <h2>Confirma tu asistencia</h2>
+        <form>
+            <input type="text" placeholder="Tu nombre" required>
+            <input type="email" placeholder="Tu correo" required>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>Comparte tus fotos aquí: <a href="https://drive.google.com/" style="color:white;">Google Drive</a></p>
+    </footer>
+    
+    <script>
+        function updateCountdown() {
+            const weddingDate = new Date("2025-09-27T18:00:00").getTime();
+            const now = new Date().getTime();
+            const difference = weddingDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerText = `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function toggleEvento(element) {
+            const detalle = element.querySelector(".detalle");
+            detalle.style.display = detalle.style.display === "block" ? "none" : "block";
+        }
+    </script>
 </body>
 </html>
+
